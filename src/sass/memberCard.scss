@@ -1,0 +1,66 @@
+@import "./global.scss";
+
+.card-container {
+  @extend .grid;
+  @extend .shadow;
+  border-left: 5px solid $Secondary;
+  gap: 1rem;
+  max-width: 350px;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    @extend .grid;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid $Secondary;
+  }
+  h3,
+  h6 {
+    font-weight: 400;
+    color: $Black;
+  }
+  h6 {
+    font-size: 14px;
+  }
+  .personal,
+  .public {
+    @extend .grid;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    width: 80%;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 300;
+  }
+
+  .__holder:hover {
+    border: 2px solid #16c79a;
+  }
+  .public:hover {
+    border: 2px solid #16c79a;
+  }
+  .personal:hover {
+    border: 2px solid #16c79a;
+  }
+  .__holder {
+    padding: 10px;
+    width: 80%;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    gap: 2px;
+    border-radius: 5px;
+    @extend .grid;
+
+    span {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+  }
+  .since {
+    font-weight: 300;
+  }
+}

@@ -1,0 +1,50 @@
+@import './global.scss';
+
+.card__large{
+    max-width: 40rem;
+    width: 100%;
+    height :fit-content;
+    border-radius: 10px;
+    background: white;
+    @extend .shadow;
+    @extend .grid;
+    gap: 3rem;
+    position : relative;
+    &__container{
+        @extend .flex;
+        @media screen and (max-width:500px){
+            flex-direction: column;
+        }
+        gap: 3rem;
+        .balance__holder ,.points__holder {
+            @extend .grid;
+            @extend .shadow;
+            gap: 2rem;
+
+            
+            width : 200px;
+            height : 200px;
+            border-radius: 50%;
+            border: 5px solid $Secondary;
+           margin-bottom: 10px;
+    
+            span{
+                font-size: 1rem;
+                @extend .grid;
+                gap: 2rem;
+            }
+    
+           
+        }
+        .points__holder{
+            border: 5px solid $Primary;
+        }
+    }
+
+   
+  
+   
+
+
+ 
+}

@@ -1,0 +1,74 @@
+@import "./global.scss";
+
+.storecard {
+  @extend .shadow;
+  max-width: 400px;
+  min-width: 200px;
+  width: 100%;
+  border-radius: 10px;
+  
+  border-right: 10px solid $Secondary;
+  background: rgba( 255, 255, 255, 0.35 );
+
+backdrop-filter: blur( 0px );
+-webkit-backdrop-filter: blur( 0px );
+
+.storecard__container{
+    width: 100%;
+    height: 100%;
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;  
+  
+    
+
+  .header{
+      @extend .flex;
+      gap: 1rem;
+    
+
+
+      .header__icon{
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background: $Black;
+      }
+      .card__icon{
+          font-size: 30px;
+          position: relative;
+          left: 20%;
+          top: 15%;
+      }
+      .store__name{
+          font-size: 1.5rem;
+          font-weight: 300;
+      }
+    
+  }
+  .store__bottom{
+    border-top: 1px solid $Accent;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+.joined{
+    font-size: 1rem;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+
+}
+
+
+
+}

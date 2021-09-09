@@ -1,0 +1,71 @@
+@import "./global.scss";
+
+.profile {
+  max-width: 500px;
+  width: 100%;
+  margin: 20px auto;
+  height: 100%;
+  border-radius: 10px;
+  border-right: 6px solid $Secondary;
+  border-left: 6px solid $Secondary;
+  padding: 2rem;
+  @extend .grid;
+  @extend .shadow;
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    @extend .grid;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid $Black;
+  }
+
+  .info {
+    padding: 10px;
+
+    h5 {
+      font-size: 1.8rem;
+      font-weight: 300;
+    }
+    small {
+      font-style: italic;
+      font-size: 13px;
+    }
+  }
+
+  .roles {
+    h5 {
+      font-size: 1.2rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+  .extra__info {
+    border-top: 1px solid $Accent;
+
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    gap: 3rem;
+    margin-bottom: 20px;
+
+    @media screen and (max-width: 550px) {
+      flex-direction: column;
+    }
+
+    .items {
+      gap: 1rem;
+      h5 {
+        font-size: 1.2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+}
