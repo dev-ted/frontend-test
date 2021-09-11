@@ -37,7 +37,9 @@ const StyledBadge = withStyles((theme) => ({
 
 function Header() {
     const user = useSelector(selectUser)
-    // console.log("user is >>" ,user);
+   
+
+   
   return (
     <header className="header">
       <div className="header_container">

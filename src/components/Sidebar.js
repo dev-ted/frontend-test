@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import { HiLogout } from "react-icons/hi";
 import { IconContext } from "react-icons";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import { SidebarItems } from "../Data/SidebarItems";
 import "../sass/sidebar.scss";
 import { IconButton } from "@material-ui/core";
@@ -18,6 +18,7 @@ function Sidebar() {
   const [open, setOpen] = useState(false);
   const size = useMediaQuery("(max-width:800px)");
   const dispatch = useDispatch();
+  const history = useHistory();
 
 
   useEffect(() => {
@@ -39,6 +40,11 @@ function Sidebar() {
     if(size){
       setOpen(false);
     }
+  }
+  const Logout = () => {
+    dispatch(logout())
+    history.push("/")
+      
   }
 
  
@@ -78,7 +84,7 @@ function Sidebar() {
         })}
       </ul>
 
-      <Button className="btn"onClick = {() => dispatch(logout())} endIcon={<HiLogout />}>
+      <Button className="btn"onClick = {Logout} endIcon={<HiLogout />}>
         Logout
       </Button>
     </nav>

@@ -46,11 +46,11 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function MemberCard() {
+function MemberCard({members}) {
     const classes = useStyles();
   return (
-    <div class="card-container">
-      <div class="avatar">
+    <div key ={members.id} className="card-container">
+      <div className="avatar">
         <IconButton>
           <StyledBadge
             overlap="circular"
@@ -65,22 +65,22 @@ function MemberCard() {
         </IconButton>
       </div>
       <div className="public">
-      <h3>Ricky Park</h3>
-      <h6>079 0990 346</h6>
+      <h3>{`${members.firts_name}  ${members.last_name}`}k</h3>
+      <h6>{members.cell_number}</h6>
 
       </div>
     
       <div className="personal">
-        <span><span style = {{ color : '#16C79A'}}><FaBirthdayCake /></span> 12 July 2017</span>
-        <p>male</p>
+        <span><span style = {{ color : '#16C79A'}}><FaBirthdayCake /></span> {members.dob}</span>
+        <p>{members.gender}</p>
       </div>
 
-      <div class="__holder">
+      <div className="__holder">
         <span>Balance</span>
-        <p>R 1290</p>
+        <p>{ `R ${members.balance}`}</p>
       </div>
-      <span className = "since">Joined : <span>12 june 2020</span></span>
-      <div class="other details"></div>
+      <span className = "since">Joined : <span>{members.created_at}</span></span>
+      <div className="other details"></div>
     </div>
   );
 }

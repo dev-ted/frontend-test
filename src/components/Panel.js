@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
  
 }));
 
-function Panel() {
+function Panel({dashboardData}) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = useState(0);
@@ -82,9 +82,9 @@ function Panel() {
             <CardLarge balance
             title = "Balances"
             heading1 = "Points Balance"
-            points = {20}
+            points = {dashboardData.balances.points_balance}
             heading2 = "Points Currency"
-            currency = {250}/>
+            currency = {dashboardData.balances.points_currency}/>
         </div>
       </TabPanel>
       <TabPanel value={value} index={1} dir={theme.direction}>
@@ -92,11 +92,11 @@ function Panel() {
         <CardLarge transactions
             title = "Transactions"
             heading1 = "Earn"
-            points = {20}
-            earn = {400}
+            points = {dashboardData.transactions.earn.points}
+            earn = {dashboardData.transactions.earn.earn.currency}
             heading2 = "Redeem"
-            redeem = "5000"
-            currency = {250}/>
+            redeem = {dashboardData.transactions.redeem.points}
+            currency = {dashboardData.transactions.redeem.currency}/>
         </div>
       </TabPanel>
      

@@ -11,6 +11,8 @@ import Members from '../pages/Members';
 import Preferences from '../pages/Preferences';
 import MenuDrawer from '../utils/Drawer';
 import AddStore from '../pages/AddStore';
+
+import AddMember from '../pages/AddMember';
 function Home() {
     return (
        
@@ -33,6 +35,7 @@ function Home() {
                     <Route path="/members" component={Members} />
                     <Route path="/preferences" component={Preferences} />
                     <Route path="/newstore" component={AddStore} />
+                    <Route path="/new-member" component={AddMember} />
 
                     </div>
                    

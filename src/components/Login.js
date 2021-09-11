@@ -19,6 +19,7 @@ function Login() {
   const [reset, setReset] = useState(false);
   let [message, setMessage] = useState("");
   let [severity, setSeverity] = useState("");
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
   const userData = {
@@ -35,10 +36,14 @@ function Login() {
   //     .post(requests.login, userData)
   //     .then((res) => {
   //       console.log(res.data);
+  //       dispatch(
+  //         login(localStorage.setItem('user', JSON.stringify(res.data)))
+  //       );
   //       setLoading(false);
   //     })
   //     .catch((err) => {
   //       setLoading(false);
+  //       setOpen(true);
   //       setError(true);
   //       setMessage("invalid credentials");
   //       setSeverity("error");
@@ -65,11 +70,14 @@ function Login() {
       .post(requests.signup, userData)
       .then((res) => {
         console.log(res.data);
+        dispatch(login(res.data))
         setLoading(false);
+
       })
       .catch((err) => {
         console.log(err.message);
         setLoading(false);
+        setOpen(true);
         setError(true);
         setMessage(err.message);
         setSeverity("error");
@@ -85,9 +93,11 @@ function Login() {
       .then((res) => {
         console.log(res.data);
         setLoading(false);
+        setReset(!reset);
       })
       .catch((err) => {
         setLoading(false);
+        setOpen(true);
         setError(true);
         setMessage("Email address not found in our database");
         setSeverity("error");
@@ -173,7 +183,7 @@ function Login() {
           )}
 
           {error && (
-            <Snackbars open={true} message={message} severity={severity} />
+            <Snackbars onClose={() => setOpen(false)} open={open} message={message} severity={severity} />
           )}
 
           {reset ? null : !isSignUp ? (

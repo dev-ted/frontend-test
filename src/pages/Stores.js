@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StoreCard from "../components/StoreCard";
 
 import { AiOutlineSearch } from "react-icons/ai";
@@ -6,25 +6,60 @@ import { Button } from "@material-ui/core";
 import EmptyState from "../utils/EmptyState";
 import { useHistory } from "react-router";
 import Skeleton from "@material-ui/lab/Skeleton";
+import requests from "../axios/requests";
+import axios from "../axios/instance";
 
 function Stores() {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [stores, setStores] = useState([]);
 
   setTimeout(() => {
     setLoading(true);
   }, 1000);
 
-  const data = [
-    {
-      strore: "hello store",
-      id: "1",
-    },
-  ];
+
+  useEffect(() => {
+    setLoading(true);
+
+    axios
+      .get(requests.getStores)
+      .then((response) => {
+        console.log(response?.data);
+        setStores(
+         response?.data
+        );
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(true);
+
+        setTimeout(() => {
+          
+          setLoading(false);
+         
+          
+        }, 2000);
+        
+      });
+  }, []);
 
   return (
     <div className="page">
-      {data.length > 0 ? (
+
+      {error ? (
+           <EmptyState
+           className ="empty_state"
+           image="https://i.ibb.co/x873Fj0/No-data-amico.png"
+           message="Unable to get stores Data "
+           title="Reload"
+           onClick={() => window.location.reload()}
+         />
+      ) : (
+        <>
+         {stores.length > 0 ? (
         <>
           <div className="__top">
             <form >
@@ -40,7 +75,7 @@ function Stores() {
             </div>
           </div>
           <div className="_container">
-            {!loading ? (
+            {loading ? (
                 <>
               <Skeleton variant="rect" width={400} height={150} />
               <Skeleton variant="rect" width={400} height={150} />
@@ -48,9 +83,10 @@ function Stores() {
               </>
             ) : (
               <>
-                <StoreCard />
-                <StoreCard />
-                <StoreCard />
+              {stores.map((store) => (
+                <StoreCard  store={store} />
+              ))}
+             
               </>
             )}
           </div>
@@ -58,11 +94,17 @@ function Stores() {
       ) : (
         <EmptyState
           image="https://i.ibb.co/4McmSGm/undraw-Add-files-re-v09g.png"
-          message="You currently have no stores"
+          message="No stores Found"
           title="+ New store"
           onClick={() => history.push("/newstore")}
         />
       )}
+
+        </>
+      )}
+
+
+     
     </div>
   );
 }
