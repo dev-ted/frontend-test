@@ -1,4 +1,7 @@
-let token = ""
+
+
+let token = localStorage.getItem('token');
+
 let account_id = ""
 let client_id = ""
 

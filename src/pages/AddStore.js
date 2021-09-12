@@ -25,6 +25,7 @@ function AddStore() {
   };
 
   const add = (e) => {
+    if(!name || !address || !code) return null;
     e.preventDefault();
     setLoading(true);
     axios

@@ -28,6 +28,8 @@ function AddMember() {
   };
 
   const add = (e) => {
+
+    if(!name || !surname || !phone || !dob | !gender) return null;
       e.preventDefault();
     setLoading(true);
     axios
@@ -83,7 +85,7 @@ function AddMember() {
           <option onChange={(e) => setGender(e.target.value)} required>
             Gender
           </option>
-          <option value={gender}>Male</option>
+          <option value={gender}>Male</option>git
           <option value={gender}>Femaile</option>
           <option value={gender}>Binary</option>
         </select>

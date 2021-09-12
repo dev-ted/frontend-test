@@ -39,7 +39,7 @@ function Members() {
 
   return (
     <div className="page">
-      {error ? (
+      {!error ? (
         <EmptyState
           image="https://i.ibb.co/x873Fj0/No-data-amico.png"
           message="Unable to get members Data "

@@ -36,6 +36,7 @@ function Login() {
   //     .post(requests.login, userData)
   //     .then((res) => {
   //       console.log(res.data);
+  //       localStorage.setItem("token", res.data.token);
   //       dispatch(
   //         login(localStorage.setItem('user', JSON.stringify(res.data)))
   //       );
