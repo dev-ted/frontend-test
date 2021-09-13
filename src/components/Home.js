@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Clients from '../pages/Clients';
+
 
 import '../sass/global.scss'
 import Header from './Header';
@@ -30,7 +30,7 @@ function Home() {
                <Switch>
                     <div className="app__middle">
                     <Route path="/" exact component={Dashboard} />
-                    <Route path="/clients" component={Clients} />
+                   
                     <Route path="/stores" component={Stores} />
                     <Route path="/members" component={Members} />
                     <Route path="/preferences" component={Preferences} />

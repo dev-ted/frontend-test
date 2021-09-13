@@ -23,9 +23,11 @@ function AddMember() {
     name,
     surname,
     phone,
+    store_code : "",
     dob,
     gender,
   };
+
 
   const add = (e) => {
 
@@ -70,24 +72,24 @@ function AddMember() {
           type="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          pattern="[0-9]{10}"
+          
           placeholder="phone number"
           required
         />
         <input
           type="date"
-          placeholder="date of birth"
+          placeholder="Date of birth"
           value={dob}
           onChange={(e) => setDob(e.target.value)}
           required
         />
-        <select required>
-          <option onChange={(e) => setGender(e.target.value)} required>
-            Gender
-          </option>
-          <option value={gender}>Male</option>git
-          <option value={gender}>Femaile</option>
-          <option value={gender}>Binary</option>
+        <select
+        value = {gender}
+        onChange={(e) => setGender(e.target.value)} required>
+         
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          
         </select>
 
         <button onClick={add}>{loading ? <ThreeBounce color="#fff" size={20} />  : "Add Member"}</button>

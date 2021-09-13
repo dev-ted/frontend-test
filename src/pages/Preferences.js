@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 
 import Skeleton from "@material-ui/lab/Skeleton";
 import "../sass/profile.scss";
@@ -11,11 +11,10 @@ import {
   makeStyles,
   withStyles,
 } from "@material-ui/core";
-import { logout } from "../redux/userSlice";
-import { useDispatch } from "react-redux";
+import { logout, selectUser } from "../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import axios from "../axios/instance";
-import requests from "../axios/requests";
+
 
 import EmptyState from "../utils/EmptyState";
 const StyledBadge = withStyles((theme) => ({
@@ -57,42 +56,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Preferences() {
+  const user = useSelector(selectUser)
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  const [loading, setLoading] = useState(false);
-  const [profile, setProfile] = useState([]);
-
-  useEffect(() => {
-    setLoading(true);
-
-    axios
-      .get(requests.getUser)
-      .then((res) => {
-        setProfile(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
-      });
-  }, []);
+  const [loading, setLoading] = useState(true);
+ 
+  setTimeout(() => {
+    setLoading(false);
+  }, 2000);
 
   const Logout = () => {
-    dispatch(logout());
-    history.push("/");
-  };
+    dispatch(logout())
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
+    history.push("/")
+
+      
+  }
 
   return (
     <div className="profile">
       {loading ? (
-        <Skeleton animation="wave" variant="square" width="100%" height={400} />
+        <Skeleton animation="wave" variant="rect" width="100%" height={400} />
       ) : (
         <>
-          {profile.length > 0 ? (
+          {user ? (
             <>
               <div className="avatar">
                 <IconButton>
@@ -104,27 +94,33 @@ function Preferences() {
                     }}
                     variant="dot"
                   >
-                    <Avatar className={classes.large}>t</Avatar>
+                    <Avatar className={classes.large}>
+                    {user?.data.email[0].toUpperCase()}
+                    </Avatar>
                   </StyledBadge>
                 </IconButton>
               </div>
               <div className="info grid">
-                <h5>Teddy Dev</h5>
-                <small>teddy@email.com</small>
+                <h5>{user?.data.company}</h5>
+                <small>{user?.data.email}</small>
               </div>
               <div className="roles grid">
                 <h5>Roles</h5>
-                <p>user role</p>
+                <p>
+                  {user?.data.roles?.map((role) => (
+                    <>{role}</>
+                  ))}
+                </p>
               </div>
 
               <div className="extra__info grid">
                 <div className="items grid">
                   <h5>Permissions</h5>
-                  <p>permissions list</p>
-                </div>
-                <div className="items grid">
-                  <h5>Stores</h5>
-                  <p>stores list</p>
+                  <p>
+                    {user?.data.permissions?.map((permission) => (
+                      <li>{permission},</li>
+                    ))}
+                  </p>
                 </div>
               </div>
               <div className="logout grid">

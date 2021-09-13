@@ -5,6 +5,7 @@ import "../sass/header.scss";
 import { IconContext } from "react-icons";
 import { selectUser } from "../redux/userSlice";
 import {useSelector} from 'react-redux'
+import { useHistory } from "react-router";
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -37,6 +38,7 @@ const StyledBadge = withStyles((theme) => ({
 
 function Header() {
     const user = useSelector(selectUser)
+    const history = useHistory();
    
 
    
@@ -47,7 +49,7 @@ function Header() {
           
 
           
-            <h4 >{user?.email.substring(0, user?.email.lastIndexOf("@") + " ")}</h4>
+            <h4 >{user?.data.company}</h4>
           
           <div className="header__right">
             <IconButton>
@@ -63,8 +65,8 @@ function Header() {
                 }}
                 variant="dot"
               >
-                <Avatar>
-                  {user?.email[0].toUpperCase()}
+                <Avatar onClick = {() => history.push("/preferences")}>
+                  {user?.data.email[0].toUpperCase()}
                 </Avatar>
               </StyledBadge>
             </IconButton>

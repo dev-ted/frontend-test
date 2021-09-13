@@ -34,18 +34,25 @@ const StyledBadge = withStyles((theme) => ({
     },
   }))(Badge);
 
-function Card({title,number,icon,store,color,classes}) {
+function Card({title,number,icon,store,member,active,blocked,loyalty,voucher}) {
     return (
         <div className="card">
               <div className="card__header">
                     
                     <h4>{title}</h4>
+                   
                     <div className="card__number">
                     <span >{prettyPrintStat(number)}</span>
+                 
 
                     </div>
+                    {store || member  ?( <small>{`active: ${active}`}</small>) : null }
+                   {member && <small>{`Blocked: ${blocked}`}</small>}
+                   {store && <small>{`Loyalty No: ${loyalty}`}</small>}
+                   {store && <small>{`Vouchers No: ${voucher}`}</small>}
                    
                 </div>
+                
             {store ? (
                 <StyledBadge
                 overlap="circular"
@@ -59,16 +66,20 @@ function Card({title,number,icon,store,color,classes}) {
                   <span className="card__icon">
                       {icon}
                   </span>
+                 
              
               </IconContext.Provider>
               </div>
+              
               </StyledBadge>
+              
             ) : (
                 <div className="icon__holder">
               <IconContext.Provider value={{ color: "#16C79A" }}>
                   <span className="card__icon">
                       {icon}
                   </span>
+                  
              
               </IconContext.Provider>
               </div>

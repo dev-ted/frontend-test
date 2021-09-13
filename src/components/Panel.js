@@ -80,11 +80,11 @@ function Panel({dashboardData}) {
       <TabPanel value={value} index={0} dir={theme.direction}>
         <div className="panel">
             <CardLarge balance
-            title = "Balances"
+            title = "Stores states"
             heading1 = "Points Balance"
-            points = {dashboardData.balances.points_balance}
+            points = {2}
             heading2 = "Points Currency"
-            currency = {dashboardData.balances.points_currency}/>
+            currency = {2}/>
         </div>
       </TabPanel>
       <TabPanel value={value} index={1} dir={theme.direction}>
@@ -92,11 +92,11 @@ function Panel({dashboardData}) {
         <CardLarge transactions
             title = "Transactions"
             heading1 = "Earn"
-            points = {dashboardData.transactions.earn.points}
-            earn = {dashboardData.transactions.earn.earn.currency}
+            points = {230}
+            earn = {230}
             heading2 = "Redeem"
-            redeem = {dashboardData.transactions.redeem.points}
-            currency = {dashboardData.transactions.redeem.currency}/>
+            redeem = {23}
+            currency = {23}/>
         </div>
       </TabPanel>
      

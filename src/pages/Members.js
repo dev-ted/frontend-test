@@ -18,28 +18,29 @@ function Members() {
 
   useEffect(() => {
     setLoading(true);
-
-    axios
-      .get(requests.getDashboard)
-      .then((response) => {
-        console.log(response?.data);
-        setMembers(response?.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
+    async function fetchData() {
+      const request = await axios.get(requests.getMembers).catch((err) => {
+        console.log(err);
         setError(true);
 
         setTimeout(() => {
           setLoading(false);
-        }, 2000);
+        }, 1000);
       });
+      setMembers(request?.data?.data);
+      setLoading(false);
+      return request;
+    }
+    fetchData();
+    //clean up
+    return () => {
+      setMembers([]);
+    }
   }, []);
-  console.log(members);
 
   return (
     <div className="page">
-      {!error ? (
+      {error ? (
         <EmptyState
           image="https://i.ibb.co/x873Fj0/No-data-amico.png"
           message="Unable to get members Data "
@@ -48,7 +49,7 @@ function Members() {
         />
       ) : (
         <>
-          {members.length > 0 ? (
+          {members ? (
             <>
               <div className="__top">
                 <form>
@@ -67,24 +68,24 @@ function Members() {
                 </div>
               </div>
               <div className="_container">
-                {!loading ? (
+                {loading ? (
                   <>
                     <Skeleton
                       animation="wave"
-                      variant="square"
+                      variant="rect"
                       width={350}
                       height={400}
                     />
 
                     <Skeleton
                       animation="wave"
-                      variant="square"
+                      variant="rect"
                       width={350}
                       height={400}
                     />
                     <Skeleton
                       animation="wave"
-                      variant="square"
+                      variant="rect"
                       width={350}
                       height={400}
                     />

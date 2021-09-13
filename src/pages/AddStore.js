@@ -22,6 +22,7 @@ function AddStore() {
     name,
     address,
     code,
+    user_id  : ""
   };
 
   const add = (e) => {

@@ -60,12 +60,14 @@ function MemberCard({members}) {
             }}
             variant="dot"
           >
-            <Avatar className={classes.large}>t</Avatar>
+            <Avatar className={classes.large}>
+              {members.first_name[0].toUpperCase()}
+            </Avatar>
           </StyledBadge>
         </IconButton>
       </div>
       <div className="public">
-      <h3>{`${members.firts_name}  ${members.last_name}`}k</h3>
+      <h3>{`${members.first_name}  ${members.last_name}`}k</h3>
       <h6>{members.cell_number}</h6>
 
       </div>

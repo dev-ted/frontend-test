@@ -2,42 +2,48 @@ import React, { useState, useEffect } from "react";
 import "../sass/dashboard.scss";
 import * as IoIcons from "react-icons/io5";
 import Card from "../utils/Card";
-import Panel from "../components/Panel";
+
 import { Skeleton } from "@material-ui/lab";
 import axios from "../axios/instance";
 import requests from "../axios/requests";
 
 import EmptyState from "../utils/EmptyState";
+import CardLarge from "../utils/CardLarge";
 
 function Dashboard() {
   const [loading, setLoading] = useState(false);
-  const [dashboardData, setDashboardData] = useState([]);
+  const [dashboardData, setDashboardData] = useState({});
 
-  // setTimeout(() => {
-  //   setLoading(true);
-  // }, 1000);
+ 
 
   useEffect(() => {
     setLoading(true);
 
     axios
-      .get(requests.getDashboard)
+      .post(requests.getDashboard)
       .then((response) => {
-        console.log(response?.data);
+        
         setDashboardData(
-         response.data()
+         response?.data
         );
+       
+       
         setLoading(false);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        
 
         setTimeout(() => {
           setLoading(false);
         }, 2000);
       });
+      return () => {
+        setDashboardData({});
+      }
+     
   }, []);
-  console.log(dashboardData);
+ 
+
 
   return (
     <div className="dashboard">
@@ -66,7 +72,8 @@ function Dashboard() {
           </>
         ) : (
           <>
-            {!dashboardData.length > 0 ? (
+            {!dashboardData? (
+              
              
                 <EmptyState
                   image="https://i.ibb.co/x873Fj0/No-data-amico.png"
@@ -77,22 +84,31 @@ function Dashboard() {
               
             ) : (
               <>
+            
                 <Card
                   store
                   title="Stores"
-                  number={dashboardData.stores.total}
+                  active ={dashboardData?.data?.stores.length}
+                  number={dashboardData?.data?.active_stores}
+                  loyalty={dashboardData?.data?.stores_no_loyalty}
+                  voucher={dashboardData?.data?.stores_no_voucher}
                   icon={<IoIcons.IoStorefrontOutline />}
                 />
                 <Card
+                member
                   title=" Members"
-                  number={dashboardData.members.total}
+                  blocked = {dashboardData?.data?.blocked_members}
+                  active ={dashboardData?.data?.active_loyalty_members}
+                  number={dashboardData?.data?.total_members}
                   icon={<IoIcons.IoPeopleOutline />}
                 />
+              
                 <Card
                   title="Orders"
-                  number={dashboardData.orders.total}
+                  number={dashboardData?.data?.total_orders}
                   icon={<IoIcons.IoCartOutline />}
                 />
+                
               </>
             )}
           </>
@@ -124,9 +140,16 @@ function Dashboard() {
           </>
         ) : (
           <>
-            {!dashboardData.length > 0 ? null : (
+            {!dashboardData ? null : (
               <>
-                <Panel dashboardData = {dashboardData} />
+               <CardLarge transactions
+            title = "Orders Stats"
+            heading1 = "Orders Value"
+            value = {dashboardData?.data?.total_order_value}
+           
+            heading2 = "Average Value "
+            
+            average = {dashboardData?.data?.avg_order_value}/>
               </>
             )}
           </>

@@ -4,9 +4,9 @@ import * as IoIcons from "react-icons/io5";
 import "../sass/storecard.scss";
 function StoreCard({ store }) {
   return (
-    <div class="storecard">
-      <div key={store.id} class="storecard__container">
-        <header class="header">
+    <div className="storecard">
+      <div  key={store.id}   className="storecard__container">
+        <header className="header">
           <div className="header__icon">
             <IconContext.Provider value={{ color: "#16C79A" }}>
               <span className="card__icon">
@@ -22,12 +22,12 @@ function StoreCard({ store }) {
         <div className="store__bottom">
           <div className="joined">
             <span>
-              Joined <span class="date"> {store.created_at} </span>
+              Joined: <span className="date"> {store.created_at} </span>
             </span>
-            <span>Loyalty Member</span>
+            <span>Has Loyalty</span>
           </div>
-          <span>{store._uid}</span>
-          <span>{store.code}</span>
+          <span>{`UID: ${store._uid}`}</span>
+          <span>{`Store Code: ${store.code}`}</span>
         </div>
       </div>
     </div>

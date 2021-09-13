@@ -13,98 +13,95 @@ function Stores() {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  
+
   const [stores, setStores] = useState([]);
 
-  setTimeout(() => {
-    setLoading(true);
-  }, 1000);
-
-
   useEffect(() => {
+    
     setLoading(true);
-
-    axios
-      .get(requests.getStores)
-      .then((response) => {
-        console.log(response?.data);
-        setStores(
-         response?.data
-        );
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
+    async function fetchData() {
+      const request = await axios.get(requests.getStores).catch((err) => {
+        console.log(err);
         setError(true);
 
         setTimeout(() => {
-          
           setLoading(false);
-         
-          
         }, 2000);
-        
       });
+      setStores(request.data.data);
+      setLoading(false);
+      return request;
+    }
+    fetchData();
+    return () => {
+      setStores([]);
+    }
   }, []);
+
+ 
+
+
 
   return (
     <div className="page">
-
       {error ? (
-           <EmptyState
-           className ="empty_state"
-           image="https://i.ibb.co/x873Fj0/No-data-amico.png"
-           message="Unable to get stores Data "
-           title="Reload"
-           onClick={() => window.location.reload()}
-         />
-      ) : (
-        <>
-         {stores.length > 0 ? (
-        <>
-          <div className="__top">
-            <form >
-              <span>
-                <AiOutlineSearch />
-              </span>
-              <input type="search" placeholder="Search for store" />
-              <button>Search</button>
-            </form>
-
-            <div className="add__storre">
-              <Button  onClick={() => history.push("/newstore")}>+New Store</Button>
-            </div>
-          </div>
-          <div className="_container">
-            {loading ? (
-                <>
-              <Skeleton variant="rect" width={400} height={150} />
-              <Skeleton variant="rect" width={400} height={150} />
-              <Skeleton variant="rect" width={400} height={150} />
-              </>
-            ) : (
-              <>
-              {stores.map((store) => (
-                <StoreCard  store={store} />
-              ))}
-             
-              </>
-            )}
-          </div>
-        </>
-      ) : (
         <EmptyState
-          image="https://i.ibb.co/4McmSGm/undraw-Add-files-re-v09g.png"
-          message="No stores Found"
-          title="+ New store"
-          onClick={() => history.push("/newstore")}
+          className="empty_state"
+          image="https://i.ibb.co/x873Fj0/No-data-amico.png"
+          message="Unable to get stores Data "
+          title="Reload"
+          onClick={() => window.location.reload()}
         />
-      )}
+      ) : (
+        <>
+          {stores ? (
+            <>
+              <div className="__top">
+                <form>
+                  <span>
+                    <AiOutlineSearch />
+                  </span>
+                  <input
+                   
+                    type="search"
+                    placeholder="Search for store"
+                  />
+                  <button onClick={(e) => e.preventDefault()}>Search</button>
+                </form>
 
+                <div className="add__storre">
+                  <Button onClick={() => history.push("/newstore")}>
+                    +New Store
+                  </Button>
+                </div>
+              </div>
+              <div className="_container">
+                {loading ? (
+                  <>
+                    <Skeleton variant="rect" width={400} height={150} />
+                    <Skeleton variant="rect" width={400} height={150} />
+                    <Skeleton variant="rect" width={400} height={150} />
+                  </>
+                ) : (
+                  <>
+                    {stores.map((store) => (
+                      <StoreCard store={store} />
+                    ))}
+                  </>
+                )}
+              </div>
+            </>
+          ) : (
+            <EmptyState
+              image="https://i.ibb.co/4McmSGm/undraw-Add-files-re-v09g.png"
+              message="No stores Found"
+              title="+ New store"
+              onClick={() => history.push("/newstore")}
+            />
+          )}
         </>
       )}
-
-
-     
     </div>
   );
 }

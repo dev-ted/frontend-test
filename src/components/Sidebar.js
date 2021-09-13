@@ -43,7 +43,11 @@ function Sidebar() {
   }
   const Logout = () => {
     dispatch(logout())
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
     history.push("/")
+
       
   }
 
@@ -62,11 +66,7 @@ function Sidebar() {
       
 
   <div className="container">
-  <img
-    className="logo"
-    src="https://www.vetro.co.za/wp-content/uploads/2017/09/VetroMedia-BlackLogo.png"
-    alt=""
-  />
+ 
   <IconContext.Provider value={{ color: "#16C79A" }}>
     <nav>
       <ul>

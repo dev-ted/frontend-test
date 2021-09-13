@@ -44,7 +44,7 @@
   }
   .extra__info {
     border-top: 1px solid $Accent;
-
+width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -58,9 +58,14 @@
     }
 
     .items {
+      width: 100%;
       gap: 1rem;
       h5 {
         font-size: 1.2rem;
+      }
+      li{
+        list-style: disc;
+        width: 100%;
       }
 
       p {

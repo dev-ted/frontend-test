@@ -7,8 +7,7 @@ function Loading() {
            <div>
          
            <Circle color="#16C79A" size = {100} />
-           {/* <ThreeBounce color="#16C79A" size = {50} />
-           <ChasingDots color="#16C79A" size = {50} /> */}
+          
            </div>
         </center>
     )

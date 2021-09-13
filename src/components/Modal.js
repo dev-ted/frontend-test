@@ -50,6 +50,7 @@ export default function TransitionsModal() {
     phone,
 }
   const handleSubmit = (e) => {
+    if(!phone || !points) return null;
       e.preventDefault();
       setLoading(true);
       axios

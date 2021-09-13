@@ -28,7 +28,7 @@ function App() {
 setLoad(true)
   }, 1000);
   const users = localStorage.getItem('user')
-  console.log("users",users);
+ 
  
   useEffect(() => {
     if (users) {
